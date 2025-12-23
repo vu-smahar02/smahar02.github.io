@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Spending Tracker | Falvey Data Viz</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Chart.js (CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div>
+          <h1>Spending Tracker Dashboard</h1>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-label">Total Spending</div>
+          <div class="kpi-value" id="kpiTotal">$0</div>
+          <div class="kpi-note" id="kpiMonth">Month: —</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container main">
+      <section class="intro card">
+        <div class="intro-header">
+          <h2>Project Overview</h2>
+        </div>
+
+        <div class="intro-body">
+          <div class="intro-copy">
+            <p>
+              Each month, I download my credit card statements as .csv files and run them through a locally hosted, open source large language model to categorize transactions into a small set of buckets (Rent, Utilities, Household/Groceries, Dining Out, Travel, Subscriptions, and Miscellaneous). I then review the results to correct edge cases, such as ambiguous merchants or one-off purchases.
+            </p>
+
+            <p>
+              This workflow keeps my financial data private because nothing is uploaded to the cloud or sent to closed-source LLMs. The dashboard summarizes the current month at a glance and highlights category trends over the last six months, making patterns easier to spot early.
+            </p>
+          </div>
+
+          <aside class="legend-panel">
+            <div class="legend-head">
+              <h3>Legend</h3>
+            </div>
+
+            <div id="categoryLegend" class="legend-body"></div>
+            <div class="toast" id="toast" aria-live="polite" role="status"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <div class="card-head">
+            <h3>Current month split</h3>
+            <!-- <p class="muted">Pie shows relative share of selected categories.</p> -->
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="pieChart"></canvas>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h3>Current month amounts</h3>
+            <!-- <p class="muted">Bar shows absolute $ per selected category.</p> -->
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="barChart"></canvas>
+          </div>
+        </article>
+
+        <article class="card card-wide">
+          <div class="card-head">
+            <h3>6 month trends</h3>
+            <p class="muted">Toggle categories to compare trends over time.</p>
+          </div>
+          <div class="canvas-wrap tall">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

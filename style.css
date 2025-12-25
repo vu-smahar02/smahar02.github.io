@@ -271,3 +271,9 @@ h1 {
   .canvas-wrap { height: 280px; }
   .canvas-wrap.tall { height: 320px; }
 }
+
+canvas { display: block; }
+.canvas-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

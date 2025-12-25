@@ -276,3 +276,18 @@ function updateAll() {
 renderLegend();
 buildCharts();
 updateAll();
+
+function forceResizeCharts() {
+  [pieChart, barChart, lineChart].forEach((ch) => ch && ch.resize());
+}
+
+// Re-resize on window changes
+let resizeRaf = null;
+window.addEventListener("resize", () => {
+  if (resizeRaf) cancelAnimationFrame(resizeRaf);
+  resizeRaf = requestAnimationFrame(() => forceResizeCharts());
+});
+
+// Also watch the chart containers (catches grid/media-query relayouts reliably)
+const ro = new ResizeObserver(() => forceResizeCharts());
+document.querySelectorAll(".canvas-wrap").forEach((el) => ro.observe(el));
